@@ -1,0 +1,1 @@
+./mkfs ../kern/kfs.raw ../user/bin/init_fib_fib ../user/bin/init_fib_rule30 ../user/bin/init_trek_rule30 ../user/bin/fib ../user/bin/trek ../user/bin/rule30 ../user/bin/test_refcnt ../user/bin/test_locking ../user/bin/test_extra_credit testfile.txt

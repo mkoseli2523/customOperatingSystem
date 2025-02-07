@@ -1,0 +1,8 @@
+Things that need to get done:
+
+    01/05/2025:
+        - Implement process_terminate function
+            This function terminates a process with the provided PID
+
+        - Implement signals
+            Implementing SIGKILL

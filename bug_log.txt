@@ -1,0 +1,53 @@
+=== CP1 Bugs ===
+
+== Bug #1: ==
+    Files Associated: vioblk.c
+    Description: Vioblk read/write not actually reading/writing despite data being properly transmitted to the device buffer.
+    Fix: The error was due to having wrong descriptor flags, for the data descriptor specifically. The error was fixed shortly after
+    setting the descriptor to point to itself within the read/write request loops in vioblk_read/violbk_write functions, rather than
+    pointing to the next descriptor, the way we set it in vioblk_attach.
+
+== Bug #2: ==
+    Files Associated: kfs.c
+    Description: Filesystem read/write not reading/writing properly
+    Fix: The error was due to trying to directly copy the buffer contents, or copy the buffer into device buffer directly, rather than
+    initializing the device buffer with the contents of the buffer passed into read/write. The issue was fixed after using memset() 
+    function rather than having the device buffer point to the read/write buffer.
+
+=== CP2 Bugs === 
+    
+== Bug #1: ==
+    Files Associated: kfs.c
+    Description: Encountered stack overflow error
+    Fix: The stack overflow error happened when fs_read and fs_write were allocating two extra pages onto the stack, rather than only 
+    allocating a single page. We fixed this error by making the data buffers global. 
+
+== Bug #2: == 
+    Files Associated: elf.c 
+    Description: Write flag was not set in elf.c
+    Fix: The bug happened when we called elf.c and we were not setting the user space pages to always be write-able. We fixed this by 
+    hardcoding the write flag into the rwxug_flags. This ensured that the user space pages were always write-able.
+
+== Bug #3: ==
+    Files Associated: thrasm.s
+    Description: Incorrect privilege mode handling during user mode transition.
+    Fix: In our _thread_finish_jump function, we did not properly set stvec to point to _trap_entry_from_umode, during the transition
+    from supervisor mode to user mode. As a result, exceptions and traps occurring in user mode were incorrectly routed to supervisor-mode 
+    handlers, causing privilege mode violations and kernel panics. Correcting this resolved the privilege issue.
+
+== Bug #4: == 
+    Files Associated: trapasm.s process.c
+    Description: Didn't lazy allocate user stack
+    Fix: The bug we encountered here was when we were calling memory_alloc_and_map_page when trying to allocate the stack. This caused the page fault
+    handler to panic since it resulted in the virtual address being outside the user space. To fix this, we used lazy allocation for the stack and set the 
+    thread_stack_anchor to be in the user stack rather than the kernel stack.
+
+
+=== CP3 Bugs ===
+
+== Bug #1 ==
+    Files Associated: thrasm.s trapasm.s
+    Description: Not setting thread pointer from trap entry from umode, sscratch invalid
+    Fix: We passed stack anchor into sscratch. We dereferenced the sscratch to get the thread pointer, and went into the thread struct to acquire the sp from 
+    stack base. Then we also set the sscratch back to the kernel stack anchor before going back to umode.
+
