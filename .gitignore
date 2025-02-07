@@ -2,3 +2,4 @@
 *.elf
 *.asm
 .vscode
+progress.txt
