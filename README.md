@@ -4,10 +4,14 @@ A learning-focused OS project providing basic process management, signals, and a
 
 ## Features
 - Thread scheduler
-- VIO block drivers 
+- Device drivers 
 - Interrupt and exception handling
 - Signals
+- Syscalls
+- Preemptive multitasking
 - Forking
+- Ref counting
+- Virtual memory
 - Shell
 
 ## Build
