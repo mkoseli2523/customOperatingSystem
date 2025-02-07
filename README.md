@@ -26,7 +26,7 @@ A learning-focused OS project providing basic process management, signals, and a
 ## Future
 - Whenever I get a break from classes I try to add a new future or two. I have various functions in the future I'd like to implement
 
-- **Advanced Signals**: Add more comprehensive signal handling (e.g., SIGUSR1, SIGUSR2) with user-defined handlers.
-- **IPC Mechanisms**: Implement pipes or a shared memory approach for inter-process communication.
-- **Networking**: (Long-term goal) Add a basic TCP/IP stack for remote connections.
-- **Doom Port**: Ambitious goal to eventually run Doom—requires graphics, audio, and extensive user mode support.
+    - **Advanced Signals**: Add more comprehensive signal handling (e.g., SIGUSR1, SIGUSR2) with user-defined handlers.
+    - **IPC Mechanisms**: Implement pipes or a shared memory approach for inter-process communication.
+    - **Networking**: (Long-term goal) Add a basic TCP/IP stack for remote connections.
+    - **Doom Port**: Ambitious goal to eventually run Doom—requires graphics, audio, and extensive user mode support.
